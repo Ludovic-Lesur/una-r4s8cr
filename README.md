@@ -22,3 +22,6 @@ Here is the versions compatibility table:
 | **Flag name** | **Value** | **Description** |
 |:---:|:---:|:---:|
 | `UNA_R4S8CR_DISABLE` | `defined` / `undefined` | Disable the UNA R4S8CR functions. |
+| `UNA_R4S8CR_USE_REGISTER_ACCESS` | `defined` / `undefined` | Enable register access definitions. |
+| `UNA_R4S8CR_USE_REGISTER_ACCESS_TIMEOUT` | `defined` / `undefined` | Enable register access timeout definitions. |
+| `UNA_R4S8CR_USE_REGISTER_ERROR_VALUE` | `defined` / `undefined` | Enable register error values definitions. |

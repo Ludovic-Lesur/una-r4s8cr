@@ -7,6 +7,9 @@
 
 #include "una_r4s8cr.h"
 
+#ifndef UNA_R4S8CR_DISABLE_FLAGS_FILE
+#include "una_r4s8cr_flags.h"
+#endif
 #include "error.h"
 #include "r4s8cr.h"
 #include "r4s8cr_registers.h"

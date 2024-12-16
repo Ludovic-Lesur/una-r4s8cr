@@ -8,6 +8,9 @@
 #ifndef __UNA_R4S8CR_H__
 #define __UNA_R4S8CR_H__
 
+#ifndef UNA_R4S8CR_DISABLE_FLAGS_FILE
+#include "una_r4s8cr_flags.h"
+#endif
 #include "r4s8cr.h"
 #include "types.h"
 #include "una.h"

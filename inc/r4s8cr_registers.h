@@ -8,6 +8,12 @@
 #ifndef __R4S8CR_REGISTERS_H__
 #define __R4S8CR_REGISTERS_H__
 
+#ifndef UNA_R4S8CR_DISABLE_FLAGS_FILE
+#include "una_r4s8cr_flags.h"
+#endif
+#include "types.h"
+#include "una.h"
+
 /*** R4S8CR REGISTERS structures ***/
 
 /*!******************************************************************
@@ -39,5 +45,17 @@ typedef enum {
 #define R4S8CR_REGISTER_CONTROL_MASK_R6ST       0x00000020
 #define R4S8CR_REGISTER_CONTROL_MASK_R7ST       0x00000040
 #define R4S8CR_REGISTER_CONTROL_MASK_R8ST       0x00000080
+
+/*** R4S8CR REGISTERS global variables ***/
+
+#ifdef UNA_R4S8CR_USE_REGISTER_ACCESS
+extern const UNA_register_access_t R4S8CR_REGISTER_ACCESS[R4S8CR_REGISTER_ADDRESS_LAST];
+#endif
+#ifdef UNA_R4S8CR_USE_REGISTER_ACCESS_TIMEOUT
+extern const uint32_t R4S8CR_REGISTER_ACCESS_TIMEOUT_MS[R4S8CR_REGISTER_ADDRESS_LAST];
+#endif
+#ifdef UNA_R4S8CR_USE_REGISTER_ERROR_VALUE
+extern const uint32_t R4S8CR_REGISTER_ERROR_VALUE[R4S8CR_REGISTER_ADDRESS_LAST];
+#endif
 
 #endif /* __R4S8CR_REGISTERS_H__ */
