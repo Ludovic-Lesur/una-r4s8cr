@@ -136,7 +136,15 @@ UNA_R4S8CR_status_t UNA_R4S8CR_read_register(UNA_access_parameters_t* read_param
         relay_box_id = ((read_parameters->node_addr) - UNA_NODE_ADDRESS_R4S8CR_START + 1) & 0x0F;
         // Read relays state.
         r4s8cr_status = R4S8CR_read(relay_box_id, &state);
-        R4S8CR_exit_error(UNA_R4S8CR_ERROR_BASE_R4S8CR);
+        // Check status.
+        if (r4s8cr_status == R4S8CR_ERROR_READ_TIMEOUT) {
+            // Act as a slave.
+            (read_status->reply_timeout = 1);
+            goto errors;
+        }
+        else {
+            R4S8CR_exit_error(UNA_R4S8CR_ERROR_BASE_R4S8CR);
+        }
         // Write register.
         for (idx=R4S8CR_RELAY_INDEX_MIN ; idx<=R4S8CR_RELAY_INDEX_MAX ; idx++) {
             // Convert to UNA bit representation.
