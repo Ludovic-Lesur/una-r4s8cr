@@ -49,11 +49,11 @@ errors:
 /*******************************************************************/
 UNA_R4S8CR_status_t UNA_R4S8CR_de_init(void) {
     // Local variables.
-   UNA_R4S8CR_status_t status = UNA_R4S8CR_SUCCESS;
-   R4S8CR_status_t r4s8cr_status = R4S8CR_SUCCESS;
-   // Init relay box driver.
-   r4s8cr_status = R4S8CR_de_init();
-   R4S8CR_exit_error(UNA_R4S8CR_ERROR_BASE_R4S8CR);
+    UNA_R4S8CR_status_t status = UNA_R4S8CR_SUCCESS;
+    R4S8CR_status_t r4s8cr_status = R4S8CR_SUCCESS;
+    // Init relay box driver.
+    r4s8cr_status = R4S8CR_de_init();
+    R4S8CR_exit_error(UNA_R4S8CR_ERROR_BASE_R4S8CR);
 errors:
     return status;
 }
@@ -82,7 +82,6 @@ UNA_R4S8CR_status_t UNA_R4S8CR_write_register(UNA_access_parameters_t* write_par
     UNA_R4S8CR_status_t status = UNA_R4S8CR_SUCCESS;
     R4S8CR_status_t r4s8cr_status = R4S8CR_SUCCESS;
     uint8_t relay_box_id = 0;
-    uint8_t relay_index = 0;
     uint8_t idx = 0;
     // Check parameters.
     if ((write_parameters == NULL) || (write_status == NULL)) {
@@ -107,13 +106,11 @@ UNA_R4S8CR_status_t UNA_R4S8CR_write_register(UNA_access_parameters_t* write_par
     // Convert node address to ID.
     relay_box_id = ((write_parameters->node_addr) - UNA_NODE_ADDRESS_R4S8CR_START + 1) & 0x0F;
     // Relay loop.
-    for (idx=R4S8CR_RELAY_INDEX_MIN ; idx<=R4S8CR_RELAY_INDEX_MAX ; idx++) {
-        // Compute relay id.
-        relay_index = (uint8_t) (((relay_box_id - 1) << 3) + idx + 1);
+    for (idx = 0; idx < R4S8CR_NUMBER_OF_RELAYS; idx++) {
         // Check bit mask.
         if ((reg_mask & (0b1 << idx)) != 0) {
             // Set relay state
-            r4s8cr_status = R4S8CR_write(relay_box_id, relay_index, (uint8_t) (reg_value & (0b1 << idx)));
+            r4s8cr_status = R4S8CR_write(relay_box_id, (R4S8CR_RELAY_INDEX_MIN + idx), (uint8_t) ((reg_value >> idx) & 0x01));
             R4S8CR_exit_error(UNA_R4S8CR_ERROR_BASE_R4S8CR);
         }
     }
@@ -133,11 +130,11 @@ UNA_R4S8CR_status_t UNA_R4S8CR_read_register(UNA_access_parameters_t* read_param
     uint32_t unused_mask = 0;
     // Check parameters.
     if ((read_parameters == NULL) || (read_status == NULL)) {
-       status = UNA_R4S8CR_ERROR_NULL_PARAMETER;
-       goto errors;
+        status = UNA_R4S8CR_ERROR_NULL_PARAMETER;
+        goto errors;
     }
     // Reset relays status.
-    for (idx=0 ; idx<R4S8CR_NUMBER_OF_RELAYS ; idx++) {
+    for (idx = 0; idx < R4S8CR_NUMBER_OF_RELAYS; idx++) {
         rxst[idx] = UNA_BIT_ERROR;
     }
     // Reset access status.
@@ -145,13 +142,13 @@ UNA_R4S8CR_status_t UNA_R4S8CR_read_register(UNA_access_parameters_t* read_param
     (read_status->type) = UNA_ACCESS_TYPE_READ;
     // Check node address.
     if (((read_parameters->node_addr) < UNA_NODE_ADDRESS_R4S8CR_START) || ((read_parameters->node_addr) > UNA_NODE_ADDRESS_R4S8CR_END)) {
-       (*read_status).reply_timeout = 1;
-       goto errors;
+        (*read_status).reply_timeout = 1;
+        goto errors;
     }
     // Check register address.
     if ((read_parameters->reg_addr) >= R4S8CR_REGISTER_ADDRESS_LAST) {
-       (read_status->error_received) = 1;
-       goto errors;
+        (read_status->error_received) = 1;
+        goto errors;
     }
     // Update register.
     if ((read_parameters->reg_addr) == R4S8CR_REGISTER_ADDRESS_STATUS) {
@@ -169,7 +166,7 @@ UNA_R4S8CR_status_t UNA_R4S8CR_read_register(UNA_access_parameters_t* read_param
             R4S8CR_exit_error(UNA_R4S8CR_ERROR_BASE_R4S8CR);
         }
         // Write register.
-        for (idx=R4S8CR_RELAY_INDEX_MIN ; idx<=R4S8CR_RELAY_INDEX_MAX ; idx++) {
+        for (idx = 0; idx < R4S8CR_NUMBER_OF_RELAYS; idx++) {
             // Convert to UNA bit representation.
             rxst[idx] = (((state >> idx) & 0x01) == 0) ? UNA_BIT_0 : UNA_BIT_1;
             // Write field.
@@ -202,7 +199,7 @@ UNA_R4S8CR_status_t UNA_R4S8CR_scan(UNA_node_t* nodes_list, uint8_t nodes_list_s
     read_params.reply_params.type = UNA_REPLY_TYPE_VALUE;
     read_params.reply_params.timeout_ms = 0;
     // Loop on all addresses.
-    for (node_addr=UNA_NODE_ADDRESS_R4S8CR_START ; node_addr<=UNA_NODE_ADDRESS_R4S8CR_END ; node_addr++) {
+    for (node_addr = UNA_NODE_ADDRESS_R4S8CR_START; node_addr <= UNA_NODE_ADDRESS_R4S8CR_END; node_addr++) {
         // Update read parameters.
         read_params.node_addr = node_addr;
         // Ping address.
