@@ -12,6 +12,7 @@
 #include "una_r4s8cr_flags.h"
 #endif
 #include "r4s8cr.h"
+#include "string.h"
 #include "types.h"
 #include "una.h"
 
@@ -27,8 +28,9 @@ typedef enum {
     UNA_R4S8CR_ERROR_NULL_PARAMETER,
     // Low level drivers errors.
     UNA_R4S8CR_ERROR_BASE_R4S8CR = 0x0100,
+    UNA_R4S8CR_ERROR_BASE_STRING = (UNA_R4S8CR_ERROR_BASE_R4S8CR + R4S8CR_ERROR_BASE_LAST),
     // Last base value.
-    UNA_R4S8CR_ERROR_BASE_LAST = (UNA_R4S8CR_ERROR_BASE_R4S8CR + R4S8CR_ERROR_BASE_LAST)
+    UNA_R4S8CR_ERROR_BASE_LAST = (UNA_R4S8CR_ERROR_BASE_STRING + STRING_ERROR_BASE_LAST)
 } UNA_R4S8CR_status_t;
 
 #ifndef UNA_R4S8CR_DISABLE
@@ -52,6 +54,15 @@ UNA_R4S8CR_status_t UNA_R4S8CR_init(void);
  * \retval      Function execution status.
  *******************************************************************/
 UNA_R4S8CR_status_t UNA_R4S8CR_de_init(void);
+
+/*!******************************************************************
+ * \fn UNA_R4S8CR_status_t UNA_R4S8CR_send_command(UNA_command_parameters_t* command_parameters)
+ * \brief Send a command over UNA R4S8CR interface.
+ * \param[in]   command_parameters: Pointer to the command parameters.
+ * \param[out]  none
+ * \retval      Function execution status.
+ *******************************************************************/
+UNA_R4S8CR_status_t UNA_R4S8CR_send_command(UNA_command_parameters_t* command_parameters);
 
 /*!******************************************************************
  * \fn UNA_R4S8CR_status_t UNA_R4S8CR_write_register(UNA_access_parameters_t* write_parameters, uint32_t reg_value, uint32_t reg_mask, UNA_access_status_t* write_status)

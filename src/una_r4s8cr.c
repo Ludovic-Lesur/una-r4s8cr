@@ -12,12 +12,17 @@
 #endif
 #include "error.h"
 #include "r4s8cr.h"
+#include "r4s8cr_hw.h"
 #include "r4s8cr_registers.h"
 #include "swreg.h"
 #include "types.h"
 #include "una.h"
 
 #ifndef UNA_R4S8CR_DISABLE
+
+/*** UNA R4S8CR local macros ***/
+
+#define UNA_R4S8CR_COMMAND_BUFFER_SIZE  32
 
 /*** UNA R4S8CR local global variables ***/
 
@@ -49,6 +54,24 @@ UNA_R4S8CR_status_t UNA_R4S8CR_de_init(void) {
    // Init relay box driver.
    r4s8cr_status = R4S8CR_de_init();
    R4S8CR_exit_error(UNA_R4S8CR_ERROR_BASE_R4S8CR);
+errors:
+    return status;
+}
+
+/*******************************************************************/
+UNA_R4S8CR_status_t UNA_R4S8CR_send_command(UNA_command_parameters_t* command_parameters) {
+    // Local variables.
+    UNA_R4S8CR_status_t status = UNA_R4S8CR_SUCCESS;
+    STRING_status_t string_status = STRING_SUCCESS;
+    R4S8CR_status_t r4s8cr_status = R4S8CR_SUCCESS;
+    uint8_t raw_command[UNA_R4S8CR_COMMAND_BUFFER_SIZE];
+    uint32_t raw_command_size = 0;
+    // Convert ASCII to raw bytes.
+    string_status = STRING_hexadecimal_string_to_byte_array((command_parameters->command), STRING_CHAR_NULL, raw_command, &raw_command_size);
+    STRING_exit_error(UNA_R4S8CR_ERROR_BASE_STRING);
+    // Send command.
+    r4s8cr_status = R4S8CR_HW_write(raw_command, raw_command_size);
+    R4S8CR_exit_error(UNA_R4S8CR_ERROR_BASE_R4S8CR);
 errors:
     return status;
 }
