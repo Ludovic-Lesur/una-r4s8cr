@@ -15,7 +15,8 @@ Here is the versions compatibility table:
 
 | **una-r4s8cr** | **r4s8cr-driver** | **una-lib** | **embedded-utils** |
 |:---:|:---:|:---:|:---:|
-| [sw1.0](https://github.com/Ludovic-Lesur/una-r4s8cr/releases/tag/sw1.0) | >= [sw1.0](https://github.com/Ludovic-Lesur/r4s8cr-driver/releases/tag/sw1.0) | >= [sw1.0](https://github.com/Ludovic-Lesur/una-lib/releases/tag/sw1.0) | >= [sw6.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw6.0) |
+| [sw2.0](https://github.com/Ludovic-Lesur/una-r4s8cr/releases/tag/sw2.0) | >= [sw2.0](https://github.com/Ludovic-Lesur/r4s8cr-driver/releases/tag/sw2.0) | >= [sw2.0](https://github.com/Ludovic-Lesur/una-lib/releases/tag/sw2.0) | >= [sw6.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw6.0) |
+| [sw1.0](https://github.com/Ludovic-Lesur/una-r4s8cr/releases/tag/sw1.0) | [sw1.0](https://github.com/Ludovic-Lesur/r4s8cr-driver/releases/tag/sw1.0) | [sw1.0](https://github.com/Ludovic-Lesur/una-lib/releases/tag/sw1.0) | >= [sw6.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw6.0) |
 
 # Compilation flags
 
