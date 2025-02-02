@@ -15,7 +15,7 @@
 #include "r4s8cr_hw.h"
 #include "r4s8cr_registers.h"
 #include "swreg.h"
-#include "string.h"
+#include "strings.h"
 #include "types.h"
 #include "una.h"
 

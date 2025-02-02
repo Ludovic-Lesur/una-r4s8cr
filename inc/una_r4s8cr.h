@@ -12,7 +12,7 @@
 #include "una_r4s8cr_flags.h"
 #endif
 #include "r4s8cr.h"
-#include "string.h"
+#include "strings.h"
 #include "types.h"
 #include "una.h"
 
