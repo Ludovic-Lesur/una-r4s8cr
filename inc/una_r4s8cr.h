@@ -11,6 +11,7 @@
 #ifndef UNA_R4S8CR_DISABLE_FLAGS_FILE
 #include "una_r4s8cr_flags.h"
 #endif
+#include "error.h"
 #include "r4s8cr.h"
 #include "strings.h"
 #include "types.h"
@@ -27,7 +28,7 @@ typedef enum {
     UNA_R4S8CR_SUCCESS = 0,
     UNA_R4S8CR_ERROR_NULL_PARAMETER,
     // Low level drivers errors.
-    UNA_R4S8CR_ERROR_BASE_R4S8CR = 0x0100,
+    UNA_R4S8CR_ERROR_BASE_R4S8CR = ERROR_BASE_STEP,
     UNA_R4S8CR_ERROR_BASE_STRING = (UNA_R4S8CR_ERROR_BASE_R4S8CR + R4S8CR_ERROR_BASE_LAST),
     // Last base value.
     UNA_R4S8CR_ERROR_BASE_LAST = (UNA_R4S8CR_ERROR_BASE_STRING + STRING_ERROR_BASE_LAST)
