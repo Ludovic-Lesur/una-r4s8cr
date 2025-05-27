@@ -84,6 +84,9 @@ UNA_R4S8CR_status_t UNA_R4S8CR_write_register(UNA_access_parameters_t* write_par
     R4S8CR_status_t r4s8cr_status = R4S8CR_SUCCESS;
     uint8_t relay_box_id = 0;
     uint8_t idx = 0;
+#if (UNA_R4S8CR_NODE_ACCESS_RETRY_MAX > 1)
+    uint32_t retry_count = 0;
+#endif
     // Check parameters.
     if ((write_parameters == NULL) || (write_status == NULL)) {
         status = UNA_R4S8CR_ERROR_NULL_PARAMETER;
@@ -111,7 +114,15 @@ UNA_R4S8CR_status_t UNA_R4S8CR_write_register(UNA_access_parameters_t* write_par
         // Check bit mask.
         if ((reg_mask & (0b1 << idx)) != 0) {
             // Set relay state
-            r4s8cr_status = R4S8CR_write(relay_box_id, (R4S8CR_RELAY_INDEX_MIN + idx), (uint8_t) ((reg_value >> idx) & 0x01));
+#if (UNA_R4S8CR_NODE_ACCESS_RETRY_MAX > 1)
+            for (retry_count = 0; retry_count < UNA_R4S8CR_NODE_ACCESS_RETRY_MAX; retry_count++) {
+#endif
+                r4s8cr_status = R4S8CR_write(relay_box_id, (R4S8CR_RELAY_INDEX_MIN + idx), (uint8_t) ((reg_value >> idx) & 0x01));
+#if (UNA_R4S8CR_NODE_ACCESS_RETRY_MAX > 1)
+                // Exit on first success.
+                if (r4s8cr_status == R4S8CR_SUCCESS) break;
+            }
+#endif
             R4S8CR_exit_error(UNA_R4S8CR_ERROR_BASE_R4S8CR);
         }
     }
@@ -129,6 +140,9 @@ UNA_R4S8CR_status_t UNA_R4S8CR_read_register(UNA_access_parameters_t* read_param
     UNA_bit_representation_t rxst[R4S8CR_NUMBER_OF_RELAYS];
     uint8_t idx = 0;
     uint32_t unused_mask = 0;
+#if (UNA_R4S8CR_NODE_ACCESS_RETRY_MAX > 1)
+    uint32_t retry_count = 0;
+#endif
     // Check parameters.
     if ((read_parameters == NULL) || (read_status == NULL)) {
         status = UNA_R4S8CR_ERROR_NULL_PARAMETER;
@@ -156,7 +170,15 @@ UNA_R4S8CR_status_t UNA_R4S8CR_read_register(UNA_access_parameters_t* read_param
         // Convert node address to ID.
         relay_box_id = ((read_parameters->node_addr) - UNA_NODE_ADDRESS_R4S8CR_START + 1) & 0x0F;
         // Read relays state.
-        r4s8cr_status = R4S8CR_read(relay_box_id, &state);
+#if (UNA_R4S8CR_NODE_ACCESS_RETRY_MAX > 1)
+        for (retry_count = 0; retry_count < UNA_R4S8CR_NODE_ACCESS_RETRY_MAX; retry_count++) {
+#endif
+            r4s8cr_status = R4S8CR_read(relay_box_id, &state);
+#if (UNA_R4S8CR_NODE_ACCESS_RETRY_MAX > 1)
+            // Exit on first success.
+            if (r4s8cr_status == R4S8CR_SUCCESS) break;
+        }
+#endif
         // Check status.
         if (r4s8cr_status == R4S8CR_ERROR_READ_TIMEOUT) {
             // Act as a slave.
