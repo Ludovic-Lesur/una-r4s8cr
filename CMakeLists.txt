@@ -37,7 +37,7 @@ if(${BUILD_MODE} STREQUAL STATIC)
     add_compilation_flag(UNA_R4S8CR_USE_REGISTER_ERROR_VALUE "Enable register error values definitions." ON)
     
     # Remove OFF flags from list and keep flags set to value 0.
-    foreach(FLAG ${COMPILATION_FLAGS_LIST} )
+    foreach(FLAG ${COMPILATION_FLAGS_LIST})
         if((NOT ${FLAG} STREQUAL OFF) AND (NOT ${FLAG} STREQUAL ON))
             set(${FLAG} "(${${FLAG}})")
         endif()
