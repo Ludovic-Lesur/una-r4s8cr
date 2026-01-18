@@ -15,6 +15,7 @@ Here is the versions compatibility table:
 
 | **una-r4s8cr** | **r4s8cr-driver** | **una-lib** | **embedded-utils** |
 |:---:|:---:|:---:|:---:|
+| [sw3.1](https://github.com/Ludovic-Lesur/una-r4s8cr/releases/tag/sw3.1) | >= [sw2.0](https://github.com/Ludovic-Lesur/r4s8cr-driver/releases/tag/sw2.0) | >= [sw4.2](https://github.com/Ludovic-Lesur/una-lib/releases/tag/sw4.2) | >= [sw7.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw7.0) |
 | [sw3.0](https://github.com/Ludovic-Lesur/una-r4s8cr/releases/tag/sw3.0) | >= [sw2.0](https://github.com/Ludovic-Lesur/r4s8cr-driver/releases/tag/sw2.0) | >= [sw4.2](https://github.com/Ludovic-Lesur/una-lib/releases/tag/sw4.2) | >= [sw7.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw7.0) |
 | [sw2.4](https://github.com/Ludovic-Lesur/una-r4s8cr/releases/tag/sw2.4) | >= [sw2.0](https://github.com/Ludovic-Lesur/r4s8cr-driver/releases/tag/sw2.0) | [sw2.1](https://github.com/Ludovic-Lesur/una-lib/releases/tag/sw2.1) to [sw4.1](https://github.com/Ludovic-Lesur/una-lib/releases/tag/sw4.1) | >= [sw7.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw7.0) |
 | [sw2.3](https://github.com/Ludovic-Lesur/una-r4s8cr/releases/tag/sw2.3) | >= [sw2.0](https://github.com/Ludovic-Lesur/r4s8cr-driver/releases/tag/sw2.0) | [sw2.1](https://github.com/Ludovic-Lesur/una-lib/releases/tag/sw2.1) to [sw4.1](https://github.com/Ludovic-Lesur/una-lib/releases/tag/sw4.1) | >= [sw7.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw7.0) |
