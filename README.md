@@ -44,8 +44,6 @@ cmake -DCMAKE_TOOLCHAIN_FILE="<toolchain_file_path>" \
       -DEMBEDDED_UTILS_PATH="<embedded-utils_path>" \
       -DUNA_LIB_PATH="<una-lib_path>" \
       -DR4S8CR_DRIVER_PATH="<r4s8cr-driver_path>" \
-      -DR4S8CR_DRIVER_DELAY_ERROR_BASE_LAST=0 \
-      -DR4S8CR_DRIVER_RS485_ERROR_BASE_LAST=0 \
       -DUNA_R4S8CR_NODE_ACCESS_RETRY_MAX=3 \
       -G "Unix Makefiles" ..
 make all
