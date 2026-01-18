@@ -32,9 +32,6 @@ if(${BUILD_MODE} STREQUAL STATIC)
     # Compilation flags.
     add_compilation_flag(UNA_R4S8CR_DISABLE "Disable the UNA R4S8CR functions." OFF)
     add_compilation_flag(UNA_R4S8CR_NODE_ACCESS_RETRY_MAX "Number of relay box access retries in case of failure." 3)
-    add_compilation_flag(UNA_R4S8CR_USE_REGISTER_ACCESS "Enable register access definitions." ON)
-    add_compilation_flag(UNA_R4S8CR_USE_REGISTER_ACCESS_TIMEOUT "Enable register access timeout definitions." ON)
-    add_compilation_flag(UNA_R4S8CR_USE_REGISTER_ERROR_VALUE "Enable register error values definitions." ON)
     
     # Remove OFF flags from list and keep flags set to value 0.
     foreach(FLAG ${COMPILATION_FLAGS_LIST})

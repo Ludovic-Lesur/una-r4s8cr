@@ -29,9 +29,6 @@ Here is the versions compatibility table:
 | `UNA_R4S8CR_DISABLE_FLAGS_FILE` | `defined` / `undefined` | Disable the `una_r4s8cr_flags.h` header file inclusion when compilation flags are given in the project settings or by command line. |
 | `UNA_R4S8CR_DISABLE` | `defined` / `undefined` | Disable the UNA R4S8CR functions. |
 | `UNA_R4S8CR_NODE_ACCESS_RETRY_MAX` | `<value>` | Number of relay box access retries in case of failure. |
-| `UNA_R4S8CR_USE_REGISTER_ACCESS` | `defined` / `undefined` | Enable register access definitions. |
-| `UNA_R4S8CR_USE_REGISTER_ACCESS_TIMEOUT` | `defined` / `undefined` | Enable register access timeout definitions. |
-| `UNA_R4S8CR_USE_REGISTER_ERROR_VALUE` | `defined` / `undefined` | Enable register error values definitions. |
 
 # Build
 
@@ -49,9 +46,6 @@ cmake -DCMAKE_TOOLCHAIN_FILE="<toolchain_file_path>" \
       -DR4S8CR_DRIVER_DELAY_ERROR_BASE_LAST=0 \
       -DR4S8CR_DRIVER_RS485_ERROR_BASE_LAST=0 \
       -DUNA_R4S8CR_NODE_ACCESS_RETRY_MAX=3 \
-      -DUNA_R4S8CR_USE_REGISTER_ACCESS=ON \
-      -DUNA_R4S8CR_USE_REGISTER_ACCESS_TIMEOUT=ON \
-      -DUNA_R4S8CR_USE_REGISTER_ERROR_VALUE=ON \
       -G "Unix Makefiles" ..
 make all
 ```
