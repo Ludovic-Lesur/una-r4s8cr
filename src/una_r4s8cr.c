@@ -27,7 +27,7 @@
 
 /*** UNA R4S8CR local global variables ***/
 
-static uint32_t R4S8CR_REGISTERS[R4S8CR_REGISTER_ADDRESS_LAST] = {
+static uint32_t R4S8CR_RAM_REGISTER[R4S8CR_REGISTER_ADDRESS_LAST] = {
     ((UNA_BIT_ERROR << 14) | (UNA_BIT_ERROR << 12) | (UNA_BIT_ERROR << 10) | (UNA_BIT_ERROR << 8) |
      (UNA_BIT_ERROR << 6)  | (UNA_BIT_ERROR << 4)  | (UNA_BIT_ERROR << 2)  | (UNA_BIT_ERROR << 0)),
     0x00000000
@@ -106,7 +106,7 @@ UNA_R4S8CR_status_t UNA_R4S8CR_write_register(UNA_access_parameters_t* write_par
         goto errors;
     }
     // Update RAM register value.
-    SWREG_modify_register(&(R4S8CR_REGISTERS[write_parameters->reg_addr]), reg_value, reg_mask);
+    SWREG_modify_register(&(R4S8CR_RAM_REGISTER[write_parameters->reg_addr]), reg_value, reg_mask);
     // Convert node address to ID.
     relay_box_id = ((write_parameters->node_addr) - UNA_NODE_ADDRESS_R4S8CR_START + 1) & 0x0F;
     // Relay loop.
@@ -193,10 +193,10 @@ UNA_R4S8CR_status_t UNA_R4S8CR_read_register(UNA_access_parameters_t* read_param
             // Convert to UNA bit representation.
             rxst[idx] = (((state >> idx) & 0x01) == 0) ? UNA_BIT_0 : UNA_BIT_1;
             // Write field.
-            SWREG_write_field(&(R4S8CR_REGISTERS[R4S8CR_REGISTER_ADDRESS_STATUS]), &unused_mask, ((uint32_t) rxst[idx]), (0b11 << (idx << 1)));
+            SWREG_write_field(&(R4S8CR_RAM_REGISTER[R4S8CR_REGISTER_ADDRESS_STATUS]), &unused_mask, ((uint32_t) rxst[idx]), (0b11 << (idx << 1)));
         }
     }
-    (*reg_value) = R4S8CR_REGISTERS[read_parameters->reg_addr];
+    (*reg_value) = R4S8CR_RAM_REGISTER[read_parameters->reg_addr];
 errors:
     return status;
 }

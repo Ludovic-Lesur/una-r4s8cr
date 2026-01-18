@@ -17,18 +17,17 @@
 
 const UNA_register_t R4S8CR_REGISTER[R4S8CR_REGISTER_ADDRESS_LAST] = {
     /* STATUS_1 */
-    {
+    UNA_GENERATE_REGISTER(
        UNA_REGISTER_ACCESS_READ_ONLY,
-       200,
        UNA_REGISTER_RESET_VALUE_STATIC,
-       (uint32_t) ((UNA_BIT_ERROR << 14) | (UNA_BIT_ERROR << 12) | (UNA_BIT_ERROR << 10) | (UNA_BIT_ERROR << 8) |
-                   (UNA_BIT_ERROR << 6)  | (UNA_BIT_ERROR << 4)  | (UNA_BIT_ERROR << 2)  | (UNA_BIT_ERROR << 0)),
-    },
+       (uint32_t) ((UNA_BIT_ERROR << 14) | (UNA_BIT_ERROR << 12) | (UNA_BIT_ERROR << 10) | (UNA_BIT_ERROR << 8) | (UNA_BIT_ERROR << 6) | (UNA_BIT_ERROR << 4) | (UNA_BIT_ERROR << 2) | (UNA_BIT_ERROR << 0)),
+       200
+    ),
     /* CONTROL_1 */
-    {
+    UNA_GENERATE_REGISTER(
        UNA_REGISTER_ACCESS_READ_WRITE,
-       5000,
        UNA_REGISTER_RESET_VALUE_STATIC,
-       0x00000000
-    },
+       0x00000000,
+       5000
+    )
 };
